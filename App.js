@@ -1,20 +1,6 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-
-import News from "./screens/news/News";
+import Main from "./Navigation/Main";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <News />
-      <StatusBar style="auto" />
-    </View>
-  );
+  return <Main />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

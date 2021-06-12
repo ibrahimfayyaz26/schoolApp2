@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  Image,
-  Dimensions,
-  SafeAreaView,
-  Text,
-  FlatList,
-} from "react-native";
-import data from "../../data/newsData";
+import { StyleSheet, View, Dimensions, SafeAreaView, Text } from "react-native";
 
 const { height, width } = Dimensions.get("window");
 
