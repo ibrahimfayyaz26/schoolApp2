@@ -1,14 +1,15 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
 import { Dimensions } from "react-native";
 
 //Screens
-import NewsStu from "../screens/news/News";
-import NewsPr from "../screens/news/UploadNewsPr";
+import DSStu from "../screens/D&S/D&S";
+import DSStaff from "../screens/D&S/D&SStaff";
 
 const stack = createStackNavigator();
 const { height, width } = Dimensions.get("window");
-const News = () => {
+const DS = () => {
   return (
     <stack.Navigator
       screenOptions={{
@@ -24,10 +25,10 @@ const News = () => {
         headerBackTitleVisible: false,
       }}
     >
-      <stack.Screen name="News" component={NewsStu} />
-      <stack.Screen name="Add" component={NewsPr} />
+      <stack.Screen name="DS" component={DSStu} />
+      <stack.Screen name="DSStaff" component={DSStaff} />
     </stack.Navigator>
   );
 };
 
-export default News;
+export default DS;
