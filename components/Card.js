@@ -11,7 +11,7 @@ const Card = (props) => {
         width: width / 1.08,
         height: height / 3.7,
         marginBottom: 15,
-        marginTop: 5,
+        marginTop: 6.5,
         elevation: 8,
         borderRadius: 10,
         shadowColor: "black",
@@ -27,10 +27,8 @@ const Card = (props) => {
           uri: props.uri,
         }}
         style={{
-          height: height / 3.7,
-          width: width / 1.66,
-          borderTopLeftRadius: 10,
-          borderBottomLeftRadius: 10,
+          height: "100%",
+          width: "66%",
         }}
       />
       <View
