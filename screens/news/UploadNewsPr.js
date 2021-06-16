@@ -13,19 +13,29 @@ import Input from "../../components/Input";
 import * as ImagePicker from "expo-image-picker";
 import { Button } from "react-native-paper";
 import Swiper from "react-native-swiper";
+import Toast from "react-native-toast-message";
 
 const { height, width } = Dimensions.get("window");
 
-const UploadNewsPr = () => {
+const UploadNewsPr = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState([]);
   const [isImage, setIsImage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const remove = (im) => {
+    const newImage = image.filter((img) => img != im);
+    setImage(newImage);
+    if (!newImage.length) setIsImage(false);
+  };
+
   const upload = async () => {
     if (title === "" || description === "" || !image.length || !isImage) {
-      console.warn("Fill the form");
+      Toast.show({
+        type: "error",
+        text1: "Fill the form",
+      });
       setIsLoading(false);
     } else {
       setTitle("");
@@ -33,6 +43,11 @@ const UploadNewsPr = () => {
       setImage([]);
       setIsImage(false);
       setIsLoading(false);
+      Toast.show({
+        type: "success",
+        text1: "News added",
+      });
+      props.navigation.goBack();
     }
   };
 
@@ -41,10 +56,11 @@ const UploadNewsPr = () => {
       const { status } =
         await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status !== "granted") {
-        //Toast
-        console.warn(
-          "Sorry, we need camera roll permissions to make this work!"
-        );
+        Toast.show({
+          type: "error",
+          text1: "Permission",
+          text2: "Sorry, we need camera roll permissions to make this work!",
+        });
       }
     })();
   }, []);
@@ -57,8 +73,6 @@ const UploadNewsPr = () => {
       quality: 1,
       allowsMultipleSelection: true,
     });
-
-    console.log(result);
 
     if (!result.cancelled) {
       setImage([...image, result.uri]);
@@ -105,6 +119,7 @@ const UploadNewsPr = () => {
                   <TouchableOpacity
                     key={Math.random() * Math.random()}
                     activeOpacity={0.9}
+                    onLongPress={() => remove(im)}
                   >
                     <Image
                       key={im.uri}
