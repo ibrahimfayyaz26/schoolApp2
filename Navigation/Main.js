@@ -4,11 +4,10 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 //Screens
-import DS from "../screens/D&S/D&S";
-import Dairy from "../screens/dairy/Dairy";
-// import News from "../screens/news/News";
-import Leave from "../screens/leave/Leave";
-import User from "../screens/user/MainPage";
+import DS from "./D&S";
+import Dairy from "./Dairy";
+import Leave from "./Leave";
+import User from "./User";
 import News from "./News";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -43,21 +42,22 @@ const Main = () => {
             ),
           }}
         />
-        <Tab.Screen
-          name="Leave"
-          component={Leave}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <Icon name="scroll" color={color} size={25} />
-            ),
-          }}
-        />
+
         <Tab.Screen
           name="DS"
           component={DS}
           options={{
             tabBarIcon: ({ color }) => (
               <Icon name="calendar-week" color={color} size={25} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Leave"
+          component={Leave}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <Icon name="scroll" color={color} size={25} />
             ),
           }}
         />

@@ -1,14 +1,15 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Dimensions } from "react-native";
+// import { useNavigation } from "@react-navigation/native";
+import { Dimensions, Text, Button } from "react-native";
 
 //Screens
-import NewsStu from "../screens/news/News";
-import NewsPr from "../screens/news/UploadNewsPr";
+import DairyStu from "../screens/dairy/Dairy";
+import DairyCr from "../screens/dairy/DairyCr";
 
 const stack = createStackNavigator();
 const { height, width } = Dimensions.get("window");
-const News = () => {
+const Dairy = () => {
   return (
     <stack.Navigator
       screenOptions={{
@@ -24,10 +25,10 @@ const News = () => {
         headerBackTitleVisible: false,
       }}
     >
-      <stack.Screen name="News" component={NewsStu} />
-      <stack.Screen name="Add" component={NewsPr} />
+      <stack.Screen name="Dairy" component={DairyStu} />
+      <stack.Screen name="DairyCr" component={DairyCr} />
     </stack.Navigator>
   );
 };
 
-export default News;
+export default Dairy;

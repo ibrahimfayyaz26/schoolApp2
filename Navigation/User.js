@@ -1,14 +1,17 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
 import { Dimensions } from "react-native";
 
 //Screens
-import NewsStu from "../screens/news/News";
-import NewsPr from "../screens/news/UploadNewsPr";
+import MainPage from "../screens/user/MainPage";
+import Login from "../screens/user/Login";
+import Register from "../screens/user/Register";
+import RegisterStaff from "../screens/user/StaffRegisterPr";
 
 const stack = createStackNavigator();
 const { height, width } = Dimensions.get("window");
-const News = () => {
+const User = () => {
   return (
     <stack.Navigator
       screenOptions={{
@@ -24,10 +27,12 @@ const News = () => {
         headerBackTitleVisible: false,
       }}
     >
-      <stack.Screen name="News" component={NewsStu} />
-      <stack.Screen name="Add" component={NewsPr} />
+      <stack.Screen name="Main" component={MainPage} />
+      <stack.Screen name="Login" component={Login} />
+      <stack.Screen name="Register" component={Register} />
+      <stack.Screen name="RegisterStaff" component={RegisterStaff} />
     </stack.Navigator>
   );
 };
 
-export default News;
+export default User;
