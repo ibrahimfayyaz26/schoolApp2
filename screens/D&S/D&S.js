@@ -22,11 +22,14 @@ const DS = (props) => {
   }, []);
   return (
     <ScrollView style={{ flex: 1 }}>
-      <Class name="6th Class" fun={() => console.log("pressed")} />
-      <Class name="7th Class" fun={() => console.log("pressed")} />
-      <Class name="8th Class" fun={() => console.log("pressed")} />
-      <Class name="9th Class" fun={() => console.log("pressed")} />
-      <Class name="10th Class" fun={() => console.log("pressed")} />
+      <Class name="6th Class" fun={() => props.navigation.navigate("DSView")} />
+      <Class name="7th Class" fun={() => props.navigation.navigate("DSView")} />
+      <Class name="8th Class" fun={() => props.navigation.navigate("DSView")} />
+      <Class name="9th Class" fun={() => props.navigation.navigate("DSView")} />
+      <Class
+        name="10th Class"
+        fun={() => props.navigation.navigate("DSView")}
+      />
     </ScrollView>
   );
 };

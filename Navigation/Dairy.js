@@ -6,6 +6,7 @@ import { Dimensions, Text, Button } from "react-native";
 //Screens
 import DairyStu from "../screens/dairy/Dairy";
 import DairyCr from "../screens/dairy/DairyCr";
+import DairyDetails from "../screens/dairy/DairyDetails";
 
 const stack = createStackNavigator();
 const { height, width } = Dimensions.get("window");
@@ -25,8 +26,28 @@ const Dairy = () => {
         headerBackTitleVisible: false,
       }}
     >
-      <stack.Screen name="Dairy" component={DairyStu} />
-      <stack.Screen name="DairyCr" component={DairyCr} />
+      <stack.Screen
+        name="Dairy"
+        options={{
+          headerBackTitleVisible: false,
+        }}
+        component={DairyStu}
+      />
+      <stack.Screen
+        name="DairyCr"
+        options={{
+          headerBackTitleVisible: false,
+          headerTitle: "Upload Dairy",
+        }}
+        component={DairyCr}
+      />
+      <stack.Screen
+        name="DetailsDairy"
+        options={{
+          headerBackTitleVisible: false,
+        }}
+        component={DairyDetails}
+      />
     </stack.Navigator>
   );
 };

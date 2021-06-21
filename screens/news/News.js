@@ -19,7 +19,17 @@ const News = (props) => {
         data={data}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Card title={item.title} uri={item.imgUri} />}
+        renderItem={({ item }) => (
+          <Card
+            title={item.title}
+            uri={item.imgUri}
+            press={() =>
+              props.navigation.navigate("NewsDetails", {
+                ...item,
+              })
+            }
+          />
+        )}
       />
     </View>
   );

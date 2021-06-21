@@ -5,6 +5,7 @@ import { Dimensions } from "react-native";
 
 //Screens
 import DSStu from "../screens/D&S/D&S";
+import DSView from "../screens/D&S/D&SView";
 import DSStaff from "../screens/D&S/D&SStaff";
 
 const stack = createStackNavigator();
@@ -26,7 +27,20 @@ const DS = () => {
       }}
     >
       <stack.Screen name="DS" component={DSStu} />
-      <stack.Screen name="DSStaff" component={DSStaff} />
+      <stack.Screen
+        name="DSView"
+        options={{
+          headerBackTitleVisible: false,
+        }}
+        component={DSView}
+      />
+      <stack.Screen
+        name="DSStaff"
+        options={{
+          headerBackTitleVisible: false,
+        }}
+        component={DSStaff}
+      />
     </stack.Navigator>
   );
 };
