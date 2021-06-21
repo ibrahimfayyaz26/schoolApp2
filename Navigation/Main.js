@@ -12,6 +12,7 @@ import Leave from "./Leave";
 import User from "../screens/user/User";
 import News from "./News";
 import Auth from "./Auth";
+import RegisterPr from "../screens/user/StaffRegisterPr";
 
 const Tab = createMaterialBottomTabNavigator();
 const stack = createStackNavigator();
@@ -35,6 +36,11 @@ const UserStack = () => {
       }}
     >
       <stack.Screen name="User" component={User} />
+      <stack.Screen
+        name="RegisterPr"
+        component={RegisterPr}
+        options={{ headerShown: false }}
+      />
     </stack.Navigator>
   );
 };
@@ -42,7 +48,7 @@ const UserStack = () => {
 const Main = () => {
   return (
     <NavigationContainer>
-      {/* <Tab.Navigator
+      <Tab.Navigator
         barStyle={{
           backgroundColor: "#222831",
         }}
@@ -97,8 +103,8 @@ const Main = () => {
             ),
           }}
         />
-      </Tab.Navigator> */}
-      <Auth />
+      </Tab.Navigator>
+      {/* <Auth /> */}
     </NavigationContainer>
   );
 };
