@@ -2,6 +2,8 @@ import React, { useLayoutEffect } from "react";
 import HButton from "../../components/HederButton";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Class from "../../components/Class";
+import classesData from "../../data/ClassesData.json";
+
 
 const Dairy = (props) => {
   useLayoutEffect(() => {
@@ -11,66 +13,22 @@ const Dairy = (props) => {
   }, []);
   return (
     <ScrollView style={{ flex: 1 }}>
-      <Class
-        name="6th Class"
+      {classesData.map(i => (
+        <Class
+          key={i._id}
+        name={i.class+" "+i.section}
         fun={() =>
           props.navigation.navigate("DetailsDairy", {
             dairy: "Eng:homeWork",
             class: {
-              class: "9th",
-              section: "Liaqat",
+              class: i.class,
+              section: i.section,
             },
           })
         }
       />
-      <Class
-        name="7th Class"
-        fun={() =>
-          props.navigation.navigate("DetailsDairy", {
-            dairy: "Eng: homeWork",
-            class: {
-              class: "9th",
-              section: "Liaqat",
-            },
-          })
-        }
-      />
-      <Class
-        name="8th Class"
-        fun={() =>
-          props.navigation.navigate("DetailsDairy", {
-            dairy: "Eng:homeWork",
-            class: {
-              class: "9th",
-              section: "Liaqat",
-            },
-          })
-        }
-      />
-      <Class
-        name="9th Class"
-        fun={() =>
-          props.navigation.navigate("DetailsDairy", {
-            dairy: "Eng:homeWork",
-            class: {
-              class: "9th",
-              section: "Liaqat",
-            },
-          })
-        }
-      />
-      <Class
-        name="10th Class"
-        fun={() =>
-          props.navigation.navigate("DetailsDairy", {
-            dairy: "Eng:homeWork",
-            class: {
-              class: "9th",
-              section: "Liaqat",
-            },
-          })
-        }
-      />
+      ))}
+      
     </ScrollView>
   );
 };

@@ -59,10 +59,9 @@ const Card = (props) => {
               marginTop: height / 55,
               color: "#00adb5",
               marginBottom: height / 200,
-              marginLeft: width / 9,
             }}
           >
-            6/13/2021
+            {props.date.split(":").shift().slice(0, 10)}
           </Text>
         </View>
       </View>

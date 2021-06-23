@@ -1,13 +1,19 @@
-import { createStore, applyMiddleware, combineReducers } from "redux";
-import thunk from "redux-thunk";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunkMiddleware from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 
-//Reducers
-import { newsReducer } from "./reducers/newsReducer";
+import newsReducer from "./reducers/newsReducer";
+import DSReducer from "./reducers/D&SReducer";
+import DairyReducer from "./reducers/DairyReducer";
 
 const reducers = combineReducers({
   news: newsReducer,
+  DS: DSReducer,
+  Dairy: DairyReducer,
 });
 
-const middleware = applyMiddleware(thunk);
+const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
 
-export default createStore(reducers, middleware);
+const store = createStore(reducers, composedEnhancer);
+
+export default store;

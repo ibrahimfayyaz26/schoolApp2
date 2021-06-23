@@ -13,6 +13,10 @@ import { Button } from "react-native-paper";
 import Swiper from "react-native-swiper";
 import Toast from "react-native-toast-message";
 import { Picker, Form } from "native-base";
+import classesData from "../../data/ClassesData.json";
+import mime from "mime";
+import { connect } from "react-redux";
+import * as Actions from "../../store/actions/DairyAction";
 
 const { height, width } = Dimensions.get("window");
 
@@ -36,6 +40,19 @@ const DairyCr = (props) => {
       });
       setIsLoading(false);
     } else {
+      // let boby = {
+      //   classes: picked,
+
+      // }
+      // form.append("classes", picked);
+      // image.map((im) =>
+      //   form.append("images", {
+      //     name: im.split("/").pop(),
+      //     uri: im,
+      //     type: mime.getType(im),
+      //   })
+      // );
+      // props.uploadDairy(form);
       setPicked("");
       setImage([]);
       setIsImage(false);
@@ -92,12 +109,10 @@ const DairyCr = (props) => {
             selectedValue={picked}
             onValueChange={(i) => setPicked(i)}
           >
-            <Picker.Item label="Class" value="key0" />
-            <Picker.Item label="6Th" value="key1" />
-            <Picker.Item label="7Th" value="key2" />
-            <Picker.Item label="8Th" value="key3" />
-            <Picker.Item label="9Th" value="key4" />
-            <Picker.Item label="10Th" value="key5" />
+            <Picker.Item label="Class" value="class" />
+            {classesData.map((i) => (
+              <Picker.Item label={i.class + " - " + i.section} value={i._id} />
+            ))}
           </Picker>
         </Form>
       </View>
@@ -165,6 +180,12 @@ const DairyCr = (props) => {
   );
 };
 
-export default DairyCr;
+const mapDispatch = (dispatch) => {
+  return {
+    uploadDairy: (form1) => dispatch(Actions.postDairy(form1)),
+  };
+};
+
+export default connect(null, mapDispatch)(DairyCr);
 
 const styles = StyleSheet.create({});

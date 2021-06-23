@@ -14,20 +14,22 @@ import * as ImagePicker from "expo-image-picker";
 import { Button } from "react-native-paper";
 import Swiper from "react-native-swiper";
 import Toast from "react-native-toast-message";
+import { connect } from "react-redux";
+import * as Actions from "../../store/actions/newsAction";
+import mime from "mime";
 
 const { height, width } = Dimensions.get("window");
 
 const UploadNewsPr = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState([]);
+  const [image, setImage] = useState();
   const [isImage, setIsImage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const remove = (im) => {
-    const newImage = image.filter((img) => img != im);
-    setImage(newImage);
-    if (!newImage.length) setIsImage(false);
+  const remove = () => {
+    setImage("");
+    setIsImage(false);
   };
 
   const upload = async () => {
@@ -38,6 +40,15 @@ const UploadNewsPr = (props) => {
       });
       setIsLoading(false);
     } else {
+      const form = new FormData();
+      form.append("title", title);
+      form.append("description", description);
+      form.append("image", {
+        name: image.split("/").pop(),
+        uri: image,
+        type: mime.getType(image),
+      });
+      props.uploadNews(form);
       setTitle("");
       setDescription("");
       setImage([]);
@@ -71,11 +82,10 @@ const UploadNewsPr = (props) => {
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
-      allowsMultipleSelection: true,
     });
 
     if (!result.cancelled) {
-      setImage([...image, result.uri]);
+      setImage(result.uri);
       setIsImage(true);
     }
   };
@@ -113,27 +123,21 @@ const UploadNewsPr = (props) => {
           }}
         >
           {isImage ? (
-            <Swiper showsButtons loop={false} style={{ height: "100%" }}>
-              {image.map((im) => {
-                return (
-                  <TouchableOpacity
-                    key={Math.random() * Math.random()}
-                    activeOpacity={0.9}
-                    onLongPress={() => remove(im)}
-                  >
-                    <Image
-                      key={im.uri}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        borderRadius: 25,
-                      }}
-                      source={{ uri: im }}
-                    />
-                  </TouchableOpacity>
-                );
-              })}
-            </Swiper>
+            <TouchableOpacity
+              key={Math.random() * Math.random()}
+              activeOpacity={0.9}
+              onLongPress={() => remove()}
+            >
+              <Image
+                key={image}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: 25,
+                }}
+                source={{ uri: image }}
+              />
+            </TouchableOpacity>
           ) : (
             <Text style={{ textAlign: "center", color: "white" }}>
               Take picture
@@ -164,6 +168,12 @@ const UploadNewsPr = (props) => {
   );
 };
 
-export default UploadNewsPr;
+const mapDispatch = (dispatch) => {
+  return {
+    uploadNews: (form1) => dispatch(Actions.postNews(form1)),
+  };
+};
+
+export default connect(null, mapDispatch)(UploadNewsPr);
 
 const styles = StyleSheet.create({});

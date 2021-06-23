@@ -16,11 +16,10 @@ const NewsDetails = (props) => {
           style={{
             width: "100%",
             height: "100%",
-            resizeMode: "contain",
             backgroundColor: "white",
           }}
           source={{
-            uri: props.route.params.imgUri,
+            uri: props.route.params.image,
           }}
         />
       </View>

@@ -13,11 +13,13 @@ import { Button } from "react-native-paper";
 import Swiper from "react-native-swiper";
 import Toast from "react-native-toast-message";
 import { Picker, Form } from "native-base";
+import mime from "mime";
+import { connect } from "react-redux";
+import * as Actions from "../../store/actions/D&SAction";
 
 const { height, width } = Dimensions.get("window");
 
 const DSStaff = (props) => {
-  const [Iclass, setClass] = useState("");
   const [image, setImage] = useState([]);
   const [isImage, setIsImage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -30,14 +32,24 @@ const DSStaff = (props) => {
   };
 
   const upload = async () => {
-    if (Iclass === "Class" || !image.length || !isImage) {
+    if (picked === "Class" || !image.length || !isImage || picked === "") {
       Toast.show({
         type: "error",
         text1: "Fill the form",
       });
       setIsLoading(false);
     } else {
-      setClass("");
+      const form = new FormData();
+      form.append("classes", picked);
+      image.map((im) =>
+        form.append("images", {
+          name: im.split("/").pop(),
+          uri: im,
+          type: mime.getType(im),
+        })
+      );
+      props.uploadDS(form);
+      setPicked("");
       setImage([]);
       setIsImage(false);
       setIsLoading(false);
@@ -67,7 +79,6 @@ const DSStaff = (props) => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 3],
       quality: 1,
       allowsMultipleSelection: true,
     });
@@ -90,15 +101,15 @@ const DSStaff = (props) => {
               height: height / 10,
               alignSelf: "center",
             }}
-            selectedValue={Iclass}
-            onValueChange={(i) => setClass(i)}
+            selectedValue={picked}
+            onValueChange={(i) => setPicked(i)}
           >
-            <Picker.Item label="Class" value="key0" />
-            <Picker.Item label="6Th" value="key1" />
-            <Picker.Item label="7Th" value="key2" />
-            <Picker.Item label="8Th" value="key3" />
-            <Picker.Item label="9Th" value="key4" />
-            <Picker.Item label="10Th" value="key5" />
+            <Picker.Item label="Class" value="Class" />
+            <Picker.Item label="6Th" value="6Th" />
+            <Picker.Item label="7Th" value="7Th" />
+            <Picker.Item label="8Th" value="8Th" />
+            <Picker.Item label="9Th" value="9Th" />
+            <Picker.Item label="10Th" value="10Th" />
           </Picker>
         </Form>
       </View>
@@ -166,6 +177,12 @@ const DSStaff = (props) => {
   );
 };
 
-export default DSStaff;
+const mapDispatch = (dispatch) => {
+  return {
+    uploadDS: (form1) => dispatch(Actions.postDS(form1)),
+  };
+};
+
+export default connect(null, mapDispatch)(DSStaff);
 
 const styles = StyleSheet.create({});
