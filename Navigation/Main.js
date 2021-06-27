@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -48,7 +48,7 @@ const UserStack = () => {
 const Main = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator
+      {/* <Tab.Navigator
         barStyle={{
           backgroundColor: "#222831",
         }}
@@ -103,8 +103,8 @@ const Main = () => {
             ),
           }}
         />
-      </Tab.Navigator>
-      {/* <Auth /> */}
+      </Tab.Navigator> */}
+      <Auth />
     </NavigationContainer>
   );
 };

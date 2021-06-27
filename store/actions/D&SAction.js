@@ -4,7 +4,7 @@ export const ADD_DS = "ADD_DS";
 
 export const getDS = () => {
   return async (dispatch) => {
-    const data = await axios.get("http://192.168.31.130:3000/DS");
+    const data = await axios.get("http://192.168.10.7:3000/DS");
     // console.log(data.data);
     dispatch({
       type: FETCH_DS,
@@ -15,7 +15,7 @@ export const getDS = () => {
 
 export const postDS = (form) => {
   return async (dispatch) => {
-    const data = await axios.post("http://192.168.31.130:3000/DS", form, {
+    const data = await axios.post("http://192.168.10.7:3000/DS", form, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     // console.log(data.data);

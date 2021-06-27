@@ -13,12 +13,50 @@ import {
 import LottieView from "lottie-react-native";
 import { Button, TextInput } from "react-native-paper";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import Toast from "react-native-toast-message";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const { width, height } = Dimensions.get("window");
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userData, setUserData] = useState();
+
+  const upload = async () => {
+    if (email === "" || password === "") {
+      Toast.show({
+        type: "error",
+        text1: "Fill the form",
+      });
+    } else {
+      let body = {
+        email,
+        password,
+      };
+      axios
+        .post("http://192.168.10.7:3000/User/login", body)
+        .then((data1) => nav(data1.data));
+      setEmail("");
+      setPassword("");
+    }
+  };
+
+  const nav = (data) => {
+    if (data.failed) {
+      Toast.show({
+        type: "error",
+        text1: "Fill the form",
+      });
+    } else if (!data.failed) {
+      AsyncStorage.setItem("token", data.token);
+      Toast.show({
+        type: "success",
+        text1: `You are logined ${data.user.userName} `,
+      });
+    }
+  };
 
   return (
     <TouchableOpacity
@@ -79,7 +117,7 @@ const Login = (props) => {
           <Button
             icon="lock-open-outline"
             mode="contained"
-            onPress={() => console.log("ok")}
+            onPress={() => upload()}
             style={{ margin: 25 }}
           >
             Login
