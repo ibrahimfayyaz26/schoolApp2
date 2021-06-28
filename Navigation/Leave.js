@@ -13,11 +13,9 @@ const LeaveStack = () => {
       screenOptions={{
         headerStyle: {
           backgroundColor: "#222831",
-          height: height / 9,
         },
         headerTitleStyle: {
           color: "#00adb5",
-          marginBottom: height / 16,
         },
         headerTitleAlign: "center",
         headerBackTitleVisible: false,

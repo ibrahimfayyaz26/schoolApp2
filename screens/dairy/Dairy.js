@@ -15,9 +15,14 @@ const Dairy = (props) => {
   );
   useLayoutEffect(() => {
     props.navigation.setOptions(
-      HButton("plus", "Dairy", () => props.navigation.navigate("DairyCr"))
+      HButton(
+        "plus",
+        "Dairy",
+        () => props.navigation.navigate("DairyCr"),
+        props.UserData[0].isCr
+      )
     );
-  }, []);
+  }, [props.UserData]);
   return (
     <ScrollView style={{ flex: 1 }}>
       {classesData.map((i) => (
@@ -42,8 +47,9 @@ const mapDispatch = (dispatch) => {
 };
 
 const mapProps = (state) => {
-  const { Dairy } = state;
+  const { Dairy, User } = state;
   return {
+    UserData: User.User,
     Data: Dairy,
   };
 };

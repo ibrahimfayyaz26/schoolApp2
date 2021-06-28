@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import jwt_decode from "jwt-decode";
 import {
   StyleSheet,
   Text,
@@ -16,6 +17,9 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import Toast from "react-native-toast-message";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { url } from "../../url";
+import { connect } from "react-redux";
+import * as Actions from "../../store/actions/UserAction";
 
 const { width, height } = Dimensions.get("window");
 
@@ -36,21 +40,29 @@ const Login = (props) => {
         password,
       };
       axios
-        .post("http://192.168.10.7:3000/User/login", body)
-        .then((data1) => nav(data1.data));
+        .post(`${url}/User/login`, body)
+        .then((data1) => nav(data1.data))
+        .catch(() => {
+          Toast.show({
+            type: "error",
+          });
+        });
       setEmail("");
       setPassword("");
     }
   };
 
   const nav = (data) => {
+    // console.log(data);
     if (data.failed) {
       Toast.show({
         type: "error",
-        text1: "Fill the form",
       });
     } else if (!data.failed) {
       AsyncStorage.setItem("token", data.token);
+      axios
+        .get(`${url}/User/${data.user._id}`)
+        .then((data2) => props.uploadUser(data2.data));
       Toast.show({
         type: "success",
         text1: `You are logined ${data.user.userName} `,
@@ -128,6 +140,12 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+const mapDispatch = (dispatch) => {
+  return {
+    uploadUser: (form1) => dispatch(Actions.getUser(form1)),
+  };
+};
+
+export default connect(null, mapDispatch)(Login);
 
 const styles = StyleSheet.create({});

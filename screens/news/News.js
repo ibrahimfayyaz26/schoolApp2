@@ -6,15 +6,21 @@ import Card from "../../components/Card";
 import data from "../../data/newsData";
 import { connect } from "react-redux";
 import * as Actions from "../../store/actions/newsAction";
+import * as Actions1 from "../../store/actions/UserAction";
 
 const { height, width } = Dimensions.get("window");
 
 const News = (props) => {
   useLayoutEffect(() => {
     props.navigation.setOptions(
-      HButton("plus", "News", () => props.navigation.navigate("Add"))
+      HButton(
+        "plus",
+        "News",
+        () => props.navigation.navigate("Add"),
+        props.UserData[0].isAdmin
+      )
     );
-  }, []);
+  }, [props.UserData]);
   useFocusEffect(
     useCallback(() => {
       props.fetchData();
@@ -44,15 +50,19 @@ const News = (props) => {
 };
 
 const mapProps = (state) => {
-  const { news } = state;
+  const { news, User } = state;
   return {
+    UserData: User.User,
     newsData: news.news,
   };
 };
 
 const mapDispatch = (dispatch) => {
+  const fun = () => {
+    dispatch(Actions1.getUser());
+  };
   return {
-    fetchData: () => dispatch(Actions.getNews()),
+    fetchData: () => dispatch(Actions.getNews(fun)),
   };
 };
 

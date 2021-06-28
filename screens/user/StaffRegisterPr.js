@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
-  Text,
   View,
   ImageBackground,
-  Image,
   Dimensions,
-  ScrollView,
   Keyboard,
   TouchableOpacity,
 } from "react-native";
 import LottieView from "lottie-react-native";
 import { Button, TextInput } from "react-native-paper";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import Toast from "react-native-toast-message";
+import axios from "axios";
+import { url } from "../../url";
+import { connect } from "react-redux";
+import * as Actions from "../../store/actions/UserAction";
 
 const { width, height } = Dimensions.get("window");
 
@@ -21,6 +22,37 @@ const RegisterPr = (props) => {
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [phone, setPhone] = useState("");
+
+  const upload = async () => {
+    if (email === "" || password === "" || phone === "" || userName === "") {
+      Toast.show({
+        type: "error",
+        text1: "Fill the form",
+      });
+    } else {
+      let body = {
+        email,
+        phone,
+        password,
+        userName,
+        isCr: props.route.params.isCr ? true : false,
+        isStaff: props.route.params.isStaff ? true : false,
+      };
+      // console.log(body);
+      axios.post(`${url}/User/register`, body).then((data1) => {
+        console.log(data1.data);
+        Toast.show({
+          type: "success",
+          text1: `You registered ${data1.data.user.userName} `,
+        });
+      });
+      setEmail("");
+      setPhone("");
+      setPassword("");
+      setUserName("");
+      props.navigation.goBack();
+    }
+  };
 
   return (
     <TouchableOpacity
@@ -96,7 +128,7 @@ const RegisterPr = (props) => {
           <Button
             icon="mail"
             mode="contained"
-            onPress={() => console.log("ok")}
+            onPress={() => upload()}
             style={{ margin: 25 }}
           >
             Register
@@ -107,6 +139,12 @@ const RegisterPr = (props) => {
   );
 };
 
-export default RegisterPr;
+const mapDispatch = (dispatch) => {
+  return {
+    uploadUser: (form1) => dispatch(Actions.getUser(form1)),
+  };
+};
+
+export default connect(null, mapDispatch)(RegisterPr);
 
 const styles = StyleSheet.create({});

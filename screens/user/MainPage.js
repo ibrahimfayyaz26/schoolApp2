@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import jwt_decode from "jwt-decode";
+
 import {
   StyleSheet,
   Text,
@@ -9,10 +11,35 @@ import {
 } from "react-native";
 import LottieView from "lottie-react-native";
 import { Button } from "react-native-paper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+import { url } from "../../url";
+import { connect } from "react-redux";
+import * as Actions from "../../store/actions/UserAction";
 
 const { width, height } = Dimensions.get("window");
 
 const MainPage = (props) => {
+  useEffect(() => {
+    again();
+  });
+
+  const again = () => {
+    authCheck();
+  };
+
+  const authCheck = async () => {
+    let token = await AsyncStorage.getItem("token");
+    // console.log(token);
+    if (token != null) {
+      var decoded = jwt_decode(token);
+      // console.log(decoded);
+      axios
+        .get(`${url}/User/${decoded.userId}`)
+        .then((data2) => props.uploadUser(data2.data));
+    }
+  };
+
   return (
     <ImageBackground
       style={{ flex: 1, alignItems: "center" }}
@@ -51,7 +78,13 @@ const MainPage = (props) => {
   );
 };
 
-export default MainPage;
+const mapDispatch = (dispatch) => {
+  return {
+    uploadUser: (form1) => dispatch(Actions.getUser(form1)),
+  };
+};
+
+export default connect(null, mapDispatch)(MainPage);
 
 const styles = StyleSheet.create({
   buttonContainer: {

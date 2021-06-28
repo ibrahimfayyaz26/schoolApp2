@@ -16,6 +16,7 @@ import { useFocusEffect } from "@react-navigation/native";
 const { height, width } = Dimensions.get("window");
 
 const DS = (props) => {
+  // console.log(props.UserData[0].isStaff);
   useFocusEffect(
     useCallback(() => {
       props.fetchData();
@@ -24,11 +25,14 @@ const DS = (props) => {
   );
   useLayoutEffect(() => {
     props.navigation.setOptions(
-      HButton("plus", "DateSheet & Syllabus", () =>
-        props.navigation.navigate("DSStaff")
+      HButton(
+        "plus",
+        "DateSheet & Syllabus",
+        () => props.navigation.navigate("DSStaff"),
+        props.UserData[0].isStaff
       )
     );
-  }, []);
+  }, [props.UserData]);
   return (
     <ScrollView style={{ flex: 1 }}>
       <Class
@@ -76,9 +80,10 @@ const DS = (props) => {
 };
 
 const mapProps = (state) => {
-  const { DS } = state;
+  const { DS, User } = state;
   return {
     DSData: DS.DS,
+    UserData: User.User,
   };
 };
 

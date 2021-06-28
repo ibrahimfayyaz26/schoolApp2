@@ -15,6 +15,10 @@ import { Button, TextInput } from "react-native-paper";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Toast from "react-native-toast-message";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { url } from "../../url";
+import { connect } from "react-redux";
+import * as Actions from "../../store/actions/UserAction";
 
 const { width, height } = Dimensions.get("window");
 
@@ -37,16 +41,28 @@ const Register = (props) => {
         password,
         userName,
       };
-      axios
-        .post("http://192.168.10.7:3000/User/register", body)
-        .then((data1) => console.log(data1));
+      axios.post(`${url}/User/register`, body).then((data1) => nav(data1.data));
       setEmail("");
       setPhone("");
       setPassword("");
       setUserName("");
+    }
+  };
+
+  const nav = (data) => {
+    // console.log(data);
+    if (data.failed) {
+      Toast.show({
+        type: "error",
+      });
+    } else if (!data.failed) {
+      AsyncStorage.setItem("token", data.token);
+      axios
+        .get(`${url}/User/${data.user._id}`)
+        .then((data2) => props.uploadUser(data2.data));
       Toast.show({
         type: "success",
-        text1: "Registerd",
+        text1: `You are registered ${data.user.userName} `,
       });
     }
   };
@@ -145,6 +161,12 @@ const Register = (props) => {
   );
 };
 
-export default Register;
+const mapDispatch = (dispatch) => {
+  return {
+    uploadUser: (form1) => dispatch(Actions.getUser(form1)),
+  };
+};
+
+export default connect(null, mapDispatch)(Register);
 
 const styles = StyleSheet.create({});
