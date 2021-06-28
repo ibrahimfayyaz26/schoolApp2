@@ -1,14 +1,96 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect } from "react";
+import jwt_decode from "jwt-decode";
 
-const MainPage = () => {
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  Image,
+  Dimensions,
+} from "react-native";
+import LottieView from "lottie-react-native";
+import { Button } from "react-native-paper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+import { url } from "../../url";
+import { connect } from "react-redux";
+import * as Actions from "../../store/actions/UserAction";
+
+const { width, height } = Dimensions.get("window");
+
+const MainPage = (props) => {
+  useEffect(() => {
+    again();
+  });
+
+  const again = () => {
+    authCheck();
+  };
+
+  const authCheck = async () => {
+    let token = await AsyncStorage.getItem("token");
+    // console.log(token);
+    if (token != null) {
+      var decoded = jwt_decode(token);
+      // console.log(decoded);
+      axios
+        .get(`${url}/User/${decoded.userId}`)
+        .then((data2) => props.uploadUser(data2.data));
+    }
+  };
+
   return (
-    <View>
-      <Text>MainPage</Text>
-    </View>
+    <ImageBackground
+      style={{ flex: 1, alignItems: "center" }}
+      source={require("../../assets/background.png")}
+    >
+      <LottieView
+        autoPlay
+        loop
+        key="animation"
+        resizeMode="cover"
+        style={{
+          width: width / 2,
+          height: height / 1.8,
+        }}
+        source={require("../../assets/waiting.json")}
+      />
+      <View style={styles.buttonContainer}>
+        <Button
+          icon="lock-open-outline"
+          mode="contained"
+          onPress={() => props.navigation.navigate("Login")}
+          style={{ margin: 7 }}
+        >
+          Login
+        </Button>
+        <Button
+          icon="mail"
+          mode="contained"
+          onPress={() => props.navigation.navigate("Register")}
+          style={{ margin: 7 }}
+        >
+          Register
+        </Button>
+      </View>
+    </ImageBackground>
   );
 };
 
-export default MainPage;
+const mapDispatch = (dispatch) => {
+  return {
+    uploadUser: (form1) => dispatch(Actions.getUser(form1)),
+  };
+};
 
-const styles = StyleSheet.create({});
+export default connect(null, mapDispatch)(MainPage);
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    width: width / 1.6,
+    height: height / 5,
+    justifyContent: "center",
+    padding: 12,
+  },
+});

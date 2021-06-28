@@ -1,0 +1,142 @@
+[
+    {
+        "_id": "60d205bf3c5f9620642b3641",
+        "class": "6th",
+        "section": "Iqbal",
+        "__v": 0,
+        "id": "60d205bf3c5f9620642b3641"
+    },
+    {
+        "_id": "60d206393c5f9620642b364a",
+        "class": "6th",
+        "section": "Liaqat",
+        "__v": 0,
+        "id": "60d206393c5f9620642b364a"
+    },
+    {
+        "_id": "60d2064e3c5f9620642b364b",
+        "class": "6th",
+        "section": "Tipu",
+        "__v": 0,
+        "id": "60d2064e3c5f9620642b364b"
+    },
+    {
+        "_id": "60d206d73c5f9620642b3654",
+        "class": "6th",
+        "section": "Sir Syed",
+        "__v": 0,
+        "id": "60d206d73c5f9620642b3654"
+    },
+    {
+        "_id": "60d205d43c5f9620642b3642",
+        "class": "7th",
+        "section": "Iqbal",
+        "__v": 0,
+        "id": "60d205d43c5f9620642b3642"
+    },
+    {
+        "_id": "60d206303c5f9620642b3649",
+        "class": "7th",
+        "section": "Liaqat",
+        "__v": 0,
+        "id": "60d206303c5f9620642b3649"
+    },
+    {
+        "_id": "60d206593c5f9620642b364c",
+        "class": "7th",
+        "section": "Tipu",
+        "__v": 0,
+        "id": "60d206593c5f9620642b364c"
+    },
+    {
+        "_id": "60d206cf3c5f9620642b3653",
+        "class": "7th",
+        "section": "Sir Syed",
+        "__v": 0,
+        "id": "60d206cf3c5f9620642b3653"
+    },
+    {
+        "_id": "60d205e73c5f9620642b3643",
+        "class": "8th",
+        "section": "Iqbal",
+        "__v": 0,
+        "id": "60d205e73c5f9620642b3643"
+    },
+    {
+        "_id": "60d206233c5f9620642b3648",
+        "class": "8th",
+        "section": "Liaqat",
+        "__v": 0,
+        "id": "60d206233c5f9620642b3648"
+    },
+    {
+        "_id": "60d206633c5f9620642b364d",
+        "class": "8th",
+        "section": "Tipu",
+        "__v": 0,
+        "id": "60d206633c5f9620642b364d"
+    },
+    {
+        "_id": "60d206c83c5f9620642b3652",
+        "class": "8th",
+        "section": "Sir Syed",
+        "__v": 0,
+        "id": "60d206c83c5f9620642b3652"
+    },
+    {
+        "_id": "60d205ed3c5f9620642b3644",
+        "class": "9th",
+        "section": "Iqbal",
+        "__v": 0,
+        "id": "60d205ed3c5f9620642b3644"
+    },
+    {
+        "_id": "60d206123c5f9620642b3647",
+        "class": "9th",
+        "section": "Liaqat",
+        "__v": 0,
+        "id": "60d206123c5f9620642b3647"
+    },
+    {
+        "_id": "60d2067a3c5f9620642b364e",
+        "class": "9th",
+        "section": "Tipu",
+        "__v": 0,
+        "id": "60d2067a3c5f9620642b364e"
+    },
+    {
+        "_id": "60d206c33c5f9620642b3651",
+        "class": "9th",
+        "section": "Sir Syed",
+        "__v": 0,
+        "id": "60d206c33c5f9620642b3651"
+    },
+    {
+        "_id": "60d205ff3c5f9620642b3645",
+        "class": "10th",
+        "section": "Iqbal",
+        "__v": 0,
+        "id": "60d205ff3c5f9620642b3645"
+    },
+    {
+        "_id": "60d206093c5f9620642b3646",
+        "class": "10th",
+        "section": "Liaqat",
+        "__v": 0,
+        "id": "60d206093c5f9620642b3646"
+    },
+    {
+        "_id": "60d206883c5f9620642b364f",
+        "class": "10th",
+        "section": "Tipu",
+        "__v": 0,
+        "id": "60d206883c5f9620642b364f"
+    },
+    {
+        "_id": "60d206bb3c5f9620642b3650",
+        "class": "10th",
+        "section": "Sir Syed",
+        "__v": 0,
+        "id": "60d206bb3c5f9620642b3650"
+    }
+]
