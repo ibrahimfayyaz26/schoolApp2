@@ -17,6 +17,7 @@ const Input = (props) => {
         color: "#00adb5",
         textAlign: "center",
         marginTop: 15,
+        padding: 15,
       }}
       value={value}
       onChangeText={onChange}
