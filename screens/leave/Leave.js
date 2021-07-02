@@ -15,6 +15,11 @@ import { Button } from "react-native-paper";
 import Swiper from "react-native-swiper";
 import Toast from "react-native-toast-message";
 import { Picker, Form } from "native-base";
+import classesData from "../../data/ClassesData.json";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { url } from "../../url";
+import axios from "axios";
+import mime from "mime";
 
 const { height, width } = Dimensions.get("window");
 
@@ -23,15 +28,14 @@ const Leave = (props) => {
   const [fatherName, setFatherName] = useState("");
   const [phone, setPhone] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState([]);
+  const [image, setImage] = useState();
   const [picked, setPicked] = useState("Class");
   const [isImage, setIsImage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const remove = (im) => {
-    const newImage = image.filter((img) => img != im);
-    setImage(newImage);
-    if (!newImage.length) setIsImage(false);
+  const remove = () => {
+    setImage();
+    setIsImage(false);
   };
 
   const upload = async () => {
@@ -41,7 +45,7 @@ const Leave = (props) => {
       fatherName === "" ||
       phone === "" ||
       description === "" ||
-      !image.length ||
+      !image ||
       !isImage
     ) {
       Toast.show({
@@ -50,19 +54,42 @@ const Leave = (props) => {
       });
       setIsLoading(false);
     } else {
+      const form = new FormData();
+      form.append("name", name);
+      form.append("phone", phone);
+      form.append("fatherName", fatherName);
+      form.append("description", description);
+      form.append("classes", picked);
+      form.append("image", {
+        name: image.split("/").pop(),
+        uri: image,
+        type: mime.getType(image),
+      });
+      send(form);
       setName("");
       setPhone("");
       setFatherName("");
       setDescription("");
       setPicked("Class");
-      setImage([]);
+      setImage();
       setIsImage(false);
       setIsLoading(false);
-      Toast.show({
-        type: "success",
-        text1: "Leave send",
-      });
     }
+  };
+
+  const send = async (form) => {
+    const token = await AsyncStorage.getItem("token");
+    const data = await axios.post(`${url}/Leave`, form, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    // console.log(data.data);
+    Toast.show({
+      type: "success",
+      text1: "Leave send",
+    });
   };
 
   useEffect(() => {
@@ -85,11 +112,10 @@ const Leave = (props) => {
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
-      allowsMultipleSelection: true,
     });
 
     if (!result.cancelled) {
-      setImage([...image, result.uri]);
+      setImage(result.uri);
       setIsImage(true);
     }
   };
@@ -145,12 +171,14 @@ const Leave = (props) => {
               selectedValue={picked}
               onValueChange={(i) => setPicked(i)}
             >
-              <Picker.Item label="Class" value="key0" />
-              <Picker.Item label="6Th" value="key1" />
-              <Picker.Item label="7Th" value="key2" />
-              <Picker.Item label="8Th" value="key3" />
-              <Picker.Item label="9Th" value="key4" />
-              <Picker.Item label="10Th" value="key5" />
+              <Picker.Item label="Class" value="Class" />
+              {classesData.map((i) => (
+                <Picker.Item
+                  key={i.id}
+                  label={i.class + " - " + i.section}
+                  value={i._id}
+                />
+              ))}
             </Picker>
           </Form>
         </View>
@@ -168,27 +196,21 @@ const Leave = (props) => {
           }}
         >
           {isImage ? (
-            <Swiper showsButtons loop={false} style={{ height: "100%" }}>
-              {image.map((im) => {
-                return (
-                  <TouchableOpacity
-                    key={Math.random() * Math.random()}
-                    activeOpacity={0.9}
-                    onLongPress={() => remove(im)}
-                  >
-                    <Image
-                      key={im.uri}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        borderRadius: 25,
-                      }}
-                      source={{ uri: im }}
-                    />
-                  </TouchableOpacity>
-                );
-              })}
-            </Swiper>
+            <TouchableOpacity
+              key={Math.random() * Math.random()}
+              activeOpacity={0.9}
+              onLongPress={() => remove()}
+            >
+              <Image
+                key={image}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: 25,
+                }}
+                source={{ uri: image }}
+              />
+            </TouchableOpacity>
           ) : (
             <Text style={{ textAlign: "center", color: "white" }}>
               Take picture

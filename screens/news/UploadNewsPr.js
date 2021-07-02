@@ -33,7 +33,7 @@ const UploadNewsPr = (props) => {
   };
 
   const upload = async () => {
-    if (title === "" || description === "" || !image.length || !isImage) {
+    if (title === "" || description === "" || !image || !isImage) {
       Toast.show({
         type: "error",
         text1: "Fill the form",
