@@ -85,7 +85,7 @@ const Leave = (props) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(data.data);
+    // console.log(data.data);
     Toast.show({
       type: "success",
       text1: "Leave send",

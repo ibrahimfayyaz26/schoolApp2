@@ -4,6 +4,9 @@ import { Dimensions } from "react-native";
 import Leave from "../screens/leave/Leave";
 import LeavePr from "../screens/leave/LeaveStudentPr";
 import LeaveStaff from "../screens/leave/LeaveStudentStaff";
+import LeaveDetails from "../screens/leave/LeaveDetails";
+import LeaveStaffDetails from "../screens/leave/LeaveStaffDetails";
+
 import { connect } from "react-redux";
 
 const stack = createStackNavigator();
@@ -43,6 +46,7 @@ const LeaveStack = (props) => {
         }}
       >
         <stack.Screen name="LeaveStaff" component={LeaveStaff} />
+        <stack.Screen name="LeaveStaffDetails" component={LeaveStaffDetails} />
       </stack.Navigator>
     );
   } else if (props.UserData[0].isStaff && props.UserData[0].isAdmin) {
@@ -60,6 +64,7 @@ const LeaveStack = (props) => {
         }}
       >
         <stack.Screen name="LeavePr" component={LeavePr} />
+        <stack.Screen name="LeaveDetails" component={LeaveDetails} />
       </stack.Navigator>
     );
   }
