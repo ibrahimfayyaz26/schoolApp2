@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Dimensions, TextInput } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  TextInput,
+  ScrollView,
+} from "react-native";
 import { Button } from "react-native-paper";
 import Toast from "react-native-toast-message";
 import { Picker, Form } from "native-base";
@@ -39,7 +45,7 @@ const DairyCr = (props) => {
   };
 
   return (
-    <>
+    <ScrollView style={{ flex: 1 }}>
       <View>
         <Form>
           <Picker
@@ -66,7 +72,7 @@ const DairyCr = (props) => {
       </View>
       <View style={{ alignItems: "center" }}>
         <TextInput
-          placeholder="Dairy"
+          placeholder="Diary"
           style={{
             borderWidth: 2,
             borderColor: "#393e46",
@@ -98,7 +104,7 @@ const DairyCr = (props) => {
           Upload
         </Button>
       </View>
-    </>
+    </ScrollView>
   );
 };
 

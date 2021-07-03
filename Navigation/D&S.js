@@ -28,14 +28,14 @@ const DS = () => {
       <stack.Screen
         name="DSView"
         options={{
-          headerBackTitleVisible: false,
+          headerTitle: "",
         }}
         component={DSView}
       />
       <stack.Screen
         name="DSStaff"
         options={{
-          headerBackTitleVisible: false,
+          headerTitle: "Upload D&S",
         }}
         component={DSStaff}
       />

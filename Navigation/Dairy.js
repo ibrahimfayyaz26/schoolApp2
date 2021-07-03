@@ -27,7 +27,7 @@ const Dairy = () => {
       <stack.Screen
         name="Dairy"
         options={{
-          headerBackTitleVisible: false,
+          headerTitle: "Diary",
         }}
         component={DairyStu}
       />
@@ -35,14 +35,14 @@ const Dairy = () => {
         name="DairyCr"
         options={{
           headerBackTitleVisible: false,
-          headerTitle: "Upload Dairy",
+          headerTitle: "Upload Diary",
         }}
         component={DairyCr}
       />
       <stack.Screen
         name="DetailsDairy"
         options={{
-          headerBackTitleVisible: false,
+          headerTitle: "Diaries",
         }}
         component={DairyDetails}
       />
