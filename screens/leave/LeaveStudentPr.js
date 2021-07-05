@@ -30,18 +30,48 @@ const LeaveStudentPr = (props) => {
 
   const fetch = async () => {
     const token = await AsyncStorage.getItem("token");
-    const data = await axios.get(`${url}/Leave`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    // console.log(data.data);
-    if (data.data == "no data found") {
-      setInitialState([]);
-      setProductsCtg([]);
+    if (props.route.name == "LeavePr") {
+      const data = await axios.get(`${url}/Leave`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // console.log(data.data);
+      if (data.data == "no data found") {
+        setInitialState([]);
+        setProductsCtg([]);
+      } else {
+        // console.log(data.data);
+
+        setInitialState(data.data);
+        setProductsCtg(data.data);
+      }
     } else {
-      setInitialState(data.data);
-      setProductsCtg(data.data);
+      const data = await axios.get(`${url}/Leave/approved`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // console.log(data.data);
+      if (data.data == "no data found") {
+        setInitialState([]);
+        setProductsCtg([]);
+      } else {
+        setInitialState(data.data);
+        setProductsCtg(data.data);
+      }
+    }
+  };
+
+  const navigation = (item) => {
+    if (props.route.name == "LeavePr") {
+      props.navigation.navigate("LeaveDetails", {
+        item: item,
+      });
+    } else {
+      props.navigation.navigate("LeaveStaffDetails", {
+        item: item,
+      });
     }
   };
 
@@ -78,11 +108,7 @@ const LeaveStudentPr = (props) => {
             return (
               <TouchableOpacity
                 activeOpacity={0.85}
-                onPress={() =>
-                  props.navigation.navigate("LeaveDetails", {
-                    item: item,
-                  })
-                }
+                onPress={() => navigation(item)}
                 style={{ flex: 1 }}
               >
                 <View

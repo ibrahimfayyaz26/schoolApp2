@@ -1,1 +1,1 @@
-export const url = "http://192.168.208.132:3000";
+export const url = "https://school-app26.herokuapp.com";

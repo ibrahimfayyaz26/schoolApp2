@@ -3,8 +3,16 @@ import { View, Image } from "react-native";
 import Swiper from "react-native-swiper";
 
 const DSView = (props) => {
-  let image = [...props.route.params.item[0].images];
+  let image;
+  if (props.route.params.item.length) {
+    image = [...props.route.params.item[0].images];
+  } else {
+    image = [
+      "https://st4.depositphotos.com/14953852/24787/v/1600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg",
+    ];
+  }
   // console.log(image);
+  //https://st4.depositphotos.com/14953852/24787/v/1600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg
 
   return (
     <View style={{ flex: 1 }}>
@@ -18,6 +26,7 @@ const DSView = (props) => {
                 width: "100%",
                 height: "100%",
               }}
+              resizeMode="contain"
               source={{
                 uri: im,
               }}

@@ -90,7 +90,7 @@ const DSStaff = (props) => {
   };
 
   return (
-    <>
+    <ScrollView style={{ flex: 1 }}>
       <View>
         <Form>
           <Picker
@@ -173,7 +173,7 @@ const DSStaff = (props) => {
           Upload
         </Button>
       </View>
-    </>
+    </ScrollView>
   );
 };
 

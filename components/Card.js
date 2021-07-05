@@ -28,7 +28,7 @@ const Card = (props) => {
       >
         <Image
           source={{
-            uri: props.uri,
+            uri: props.uri ? props.uri : null,
           }}
           style={{
             height: "100%",
@@ -50,7 +50,7 @@ const Card = (props) => {
               marginTop: height / 55,
             }}
           >
-            {props.title}
+            {props.title ? props.title : ""}
           </Text>
           <Text
             style={{
@@ -61,7 +61,7 @@ const Card = (props) => {
               marginBottom: height / 200,
             }}
           >
-            {props.date.split(":").shift().slice(0, 10)}
+            {props.date ? props.date.split(":").shift().slice(0, 10) : ""}
           </Text>
         </View>
       </View>

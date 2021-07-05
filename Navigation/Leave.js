@@ -3,7 +3,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Dimensions } from "react-native";
 import Leave from "../screens/leave/Leave";
 import LeavePr from "../screens/leave/LeaveStudentPr";
-import LeaveStaff from "../screens/leave/LeaveStudentStaff";
 import LeaveDetails from "../screens/leave/LeaveDetails";
 import LeaveStaffDetails from "../screens/leave/LeaveStaffDetails";
 
@@ -45,8 +44,20 @@ const LeaveStack = (props) => {
           headerBackTitleVisible: false,
         }}
       >
-        <stack.Screen name="LeaveStaff" component={LeaveStaff} />
-        <stack.Screen name="LeaveStaffDetails" component={LeaveStaffDetails} />
+        <stack.Screen
+          name="LeaveStaff"
+          options={{
+            headerTitle: "Leaves",
+          }}
+          component={LeavePr}
+        />
+        <stack.Screen
+          name="LeaveStaffDetails"
+          options={{
+            headerTitle: "Leaves Details",
+          }}
+          component={LeaveStaffDetails}
+        />
       </stack.Navigator>
     );
   } else if (props.UserData[0].isStaff && props.UserData[0].isAdmin) {
@@ -63,8 +74,20 @@ const LeaveStack = (props) => {
           headerBackTitleVisible: false,
         }}
       >
-        <stack.Screen name="LeavePr" component={LeavePr} />
-        <stack.Screen name="LeaveDetails" component={LeaveDetails} />
+        <stack.Screen
+          name="LeavePr"
+          options={{
+            headerTitle: "Leaves",
+          }}
+          component={LeavePr}
+        />
+        <stack.Screen
+          name="LeaveDetails"
+          options={{
+            headerTitle: "Leave Details",
+          }}
+          component={LeaveDetails}
+        />
       </stack.Navigator>
     );
   }

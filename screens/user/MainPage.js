@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 
 import {
@@ -20,61 +20,82 @@ import * as Actions from "../../store/actions/UserAction";
 const { width, height } = Dimensions.get("window");
 
 const MainPage = (props) => {
-  useEffect(() => {
-    again();
-  });
-
-  const again = () => {
-    authCheck();
-  };
+  const [is, setIs] = useState(false);
+  // useEffect(() => {
+  //   again();
+  // });
 
   const authCheck = async () => {
     let token = await AsyncStorage.getItem("token");
     // console.log(token);
     if (token != null) {
       var decoded = jwt_decode(token);
+      setIs(true);
       // console.log(decoded);
       axios
         .get(`${url}/User/${decoded.userId}`)
-        .then((data2) => props.uploadUser(data2.data));
+        .then((data2) => [props.uploadUser(data2.data), setIs(false)]);
     }
   };
 
+  authCheck();
+
   return (
-    <ImageBackground
-      style={{ flex: 1, alignItems: "center" }}
-      source={require("../../assets/background.png")}
-    >
-      <LottieView
-        autoPlay
-        loop
-        key="animation"
-        resizeMode="cover"
-        style={{
-          width: width / 2,
-          height: height / 1.8,
-        }}
-        source={require("../../assets/waiting.json")}
-      />
-      <View style={styles.buttonContainer}>
-        <Button
-          icon="lock-open-outline"
-          mode="contained"
-          onPress={() => props.navigation.navigate("Login")}
-          style={{ margin: 7 }}
+    <>
+      {!is ? (
+        <ImageBackground
+          style={{ flex: 1, alignItems: "center" }}
+          source={require("../../assets/background.png")}
         >
-          Login
-        </Button>
-        <Button
-          icon="mail"
-          mode="contained"
-          onPress={() => props.navigation.navigate("Register")}
-          style={{ margin: 7 }}
+          <LottieView
+            autoPlay
+            loop
+            key="animation"
+            resizeMode="cover"
+            style={{
+              width: width / 2,
+              height: height / 1.8,
+            }}
+            source={require("../../assets/waiting.json")}
+          />
+          <View style={styles.buttonContainer}>
+            <Button
+              icon="lock-open-outline"
+              mode="contained"
+              onPress={() => props.navigation.navigate("Login")}
+              style={{ margin: 7 }}
+            >
+              Login
+            </Button>
+            <Button
+              icon="mail"
+              mode="contained"
+              onPress={() => props.navigation.navigate("Register")}
+              style={{ margin: 7 }}
+            >
+              Register
+            </Button>
+          </View>
+        </ImageBackground>
+      ) : (
+        <View
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          Register
-        </Button>
-      </View>
-    </ImageBackground>
+          <LottieView
+            autoPlay
+            loop
+            key="animation"
+            speed={0.5}
+            resizeMode="cover"
+            style={{
+              width: width / 2,
+              height: height / 2,
+            }}
+            source={require("../../assets/loading1.json")}
+          />
+        </View>
+      )}
+    </>
   );
 };
 
