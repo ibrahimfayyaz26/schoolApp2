@@ -3,7 +3,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Dimensions } from "react-native";
 import Leave from "../screens/leave/Leave";
 import LeavePr from "../screens/leave/LeaveStudentPr";
-import LeaveStaff from "../screens/leave/LeaveStudentStaff";
 import LeaveDetails from "../screens/leave/LeaveDetails";
 import LeaveStaffDetails from "../screens/leave/LeaveStaffDetails";
 
@@ -50,7 +49,7 @@ const LeaveStack = (props) => {
           options={{
             headerTitle: "Leaves",
           }}
-          component={LeaveStaff}
+          component={LeavePr}
         />
         <stack.Screen
           name="LeaveStaffDetails"

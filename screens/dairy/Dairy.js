@@ -17,14 +17,15 @@ const Dairy = (props) => {
     props.navigation.setOptions(
       HButton(
         "plus",
-        "Dairy",
+        "Diary",
         () => props.navigation.navigate("DairyCr"),
         props.UserData[0].isCr
       )
     );
   }, [props.UserData]);
+  // console.log(props.Data.Dairy);
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1, marginBottom: 5 }}>
       {classesData.map((i) => (
         <Class
           key={i._id}

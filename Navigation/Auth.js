@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import MainPage from "../screens/user/MainPage";
 import Login from "../screens/user/Login";
 import Register from "../screens/user/Register";
-import RegisterStaff from "../screens/user/StaffRegisterPr";
+// import RegisterStaff from "../screens/user/StaffRegisterPr";
 
 const stack = createStackNavigator();
 
@@ -15,7 +15,7 @@ const User = () => {
       <stack.Screen name="Main" component={MainPage} />
       <stack.Screen name="Login" component={Login} />
       <stack.Screen name="Register" component={Register} />
-      <stack.Screen name="RegisterStaff" component={RegisterStaff} />
+      {/* <stack.Screen name="RegisterStaff" component={RegisterStaff} /> */}
     </stack.Navigator>
   );
 };

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "schoolApp",
-    "slug": "schoolApp",
+    "name": "COE",
+    "slug": "COE",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,9 +24,6 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     }
   }
 }

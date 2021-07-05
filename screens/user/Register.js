@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
-  Text,
   View,
   ImageBackground,
-  Image,
   Dimensions,
   ScrollView,
   Keyboard,
@@ -12,7 +10,6 @@ import {
 } from "react-native";
 import LottieView from "lottie-react-native";
 import { Button, TextInput } from "react-native-paper";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Toast from "react-native-toast-message";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -35,17 +32,33 @@ const Register = (props) => {
         text1: "Fill the form",
       });
     } else {
+      // console.log(props.route.params.isStaff);
+      // console.log(props.route.params.isCr);
+
       let body = {
         email,
         phone,
         password,
         userName,
+        isCr:
+          !props.route.params == false
+            ? props.route.params.isCr
+              ? true
+              : false
+            : false,
+        isStaff:
+          !props.route.params == false
+            ? props.route.params.isStaff
+              ? true
+              : false
+            : false,
       };
       axios.post(`${url}/User/register`, body).then((data1) => nav(data1.data));
       setEmail("");
       setPhone("");
       setPassword("");
       setUserName("");
+      // console.log(body);
     }
   };
 

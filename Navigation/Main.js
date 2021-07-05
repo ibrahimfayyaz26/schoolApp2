@@ -13,7 +13,7 @@ import Leave from "./Leave";
 import User from "../screens/user/User";
 import News from "./News";
 import Auth from "./Auth";
-import RegisterPr from "../screens/user/StaffRegisterPr";
+import RegisterPr from "../screens/user/Register";
 
 const Tab = createMaterialBottomTabNavigator();
 const stack = createStackNavigator();

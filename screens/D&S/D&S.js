@@ -33,6 +33,7 @@ const DS = (props) => {
       )
     );
   }, [props.UserData]);
+  // console.log(props.DSData);
   return (
     <ScrollView style={{ flex: 1 }}>
       <Class
