@@ -1,15 +1,38 @@
 import React, { useLayoutEffect, useCallback } from "react";
 import HButton from "../../components/HederButton";
 import { useFocusEffect } from "@react-navigation/native";
-import { StyleSheet, View, Dimensions, Text, FlatList } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  Text,
+  FlatList,
+  Platform,
+} from "react-native";
 import Card from "../../components/Card";
 import { connect } from "react-redux";
 import * as Actions from "../../store/actions/newsAction";
 import * as Actions1 from "../../store/actions/UserAction";
+import { AdMobInterstitial } from "expo-ads-admob";
+import Constants from "expo-constants";
 
 const { height, width } = Dimensions.get("window");
 
 const News = (props) => {
+  const ad = async () => {
+    let testID = "ca-app-pub-3940256099942544/1033173712";
+    let productionID =
+      Platform.OS === "android"
+        ? "ca-app-pub-8195323223574992/1389175814"
+        : "ca-app-pub-8195323223574992/5769713458";
+
+    let unitId = Constants.isDevice && !__DEV__ ? productionID : testID;
+    // console.log(unitId);
+    await AdMobInterstitial.setAdUnitID(unitId); // Test ID, Replace with your-admob-unit-id
+    await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: false });
+    await AdMobInterstitial.showAdAsync();
+  };
+
   useLayoutEffect(() => {
     props.navigation.setOptions(
       HButton(
@@ -23,6 +46,7 @@ const News = (props) => {
   useFocusEffect(
     useCallback(() => {
       props.fetchData();
+      ad();
     }, [])
   );
   // console.log(props.newsData.length);

@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "native-base";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { Dimensions } from "react-native";
+import { main, title } from "../color";
 
 const { height, width } = Dimensions.get("window");
 
@@ -19,7 +20,7 @@ const HederButton = (name, title, navigation, is) => {
           }}
           transparent
         >
-          <Icon size={22} name={name} color="#00adb5" />
+          <Icon size={22} name={name} color={title} />
         </Button>
       ),
     };

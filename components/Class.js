@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Dimensions, TouchableOpacity } from "react-native";
+import { main, title } from "../color";
 
 const { height, width } = Dimensions.get("window");
 
@@ -16,14 +17,14 @@ const Class = (props) => {
         borderWidth: 1,
         borderColor: "brown",
         justifyContent: "center",
-        backgroundColor: "#242f3e",
+        backgroundColor: title,
         alignSelf: "center",
       }}
     >
       <Text
         style={{
           textAlign: "center",
-          color: "#00adb5",
+          color: "white",
           fontSize: 18,
           fontWeight: "bold",
         }}

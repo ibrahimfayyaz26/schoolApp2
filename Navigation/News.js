@@ -1,6 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Dimensions } from "react-native";
+import { main, title } from "../color";
 
 //Screens
 import NewsStu from "../screens/news/News";
@@ -14,10 +15,10 @@ const News = () => {
     <stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#222831",
+          backgroundColor: main,
         },
         headerTitleStyle: {
-          color: "#00adb5",
+          color: title,
         },
         headerTitleAlign: "center",
         headerBackTitleVisible: false,
@@ -33,7 +34,6 @@ const News = () => {
       <stack.Screen
         name="NewsDetails"
         options={({ route }) => ({
-          headerBackTitleVisible: false,
           headerTitle: route.params.title,
         })}
         component={NewsDetails}
