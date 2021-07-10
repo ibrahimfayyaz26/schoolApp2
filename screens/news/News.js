@@ -15,6 +15,7 @@ import * as Actions from "../../store/actions/newsAction";
 import * as Actions1 from "../../store/actions/UserAction";
 import { AdMobInterstitial } from "expo-ads-admob";
 import Constants from "expo-constants";
+import BannerAd from "../../components/BannerAd";
 
 const { height, width } = Dimensions.get("window");
 
@@ -46,13 +47,16 @@ const News = (props) => {
   useFocusEffect(
     useCallback(() => {
       props.fetchData();
-      ad();
+      // ad();
     }, [])
   );
   // console.log(props.newsData.length);
 
   return (
     <View style={{ flex: 1 }}>
+      <View style={{ width: width, alignItems: "center", margin: 5 }}>
+        <BannerAd />
+      </View>
       {!props.newsData.length ? (
         <View>
           <Text

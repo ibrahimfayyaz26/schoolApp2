@@ -22,6 +22,7 @@ const ImageTaker = (props) => {
 
     if (!result.cancelled) {
       setImage(result.uri);
+      // console.log(result.uri);
     }
   };
 

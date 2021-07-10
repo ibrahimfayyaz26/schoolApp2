@@ -6,11 +6,11 @@ import { main, title } from "../color";
 
 const { height, width } = Dimensions.get("window");
 
-const HederButton = (name, title, navigation, is) => {
+const HederButton = (name, titleq, navigation, is) => {
   // console.log(is);
   if (is) {
     return {
-      headerTitle: title,
+      headerTitle: titleq,
       headerRight: () => (
         <Button
           onPress={() => navigation()}
@@ -25,7 +25,7 @@ const HederButton = (name, title, navigation, is) => {
       ),
     };
   } else {
-    return { headerTitle: title };
+    return { headerTitle: titleq };
   }
 };
 
