@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useNavigation } from "@react-navigation/native";
+import { main, title } from "../color";
 import { Dimensions } from "react-native";
 
 //Screens
@@ -15,10 +15,10 @@ const DS = () => {
     <stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#222831",
+          backgroundColor: main,
         },
         headerTitleStyle: {
-          color: "#00adb5",
+          color: title,
         },
         headerTitleAlign: "center",
         headerBackTitleVisible: false,

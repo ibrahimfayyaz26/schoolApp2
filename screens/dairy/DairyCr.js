@@ -55,6 +55,10 @@ const DairyCr = (props) => {
               width: width / 2,
               height: height / 10,
               alignSelf: "center",
+              borderColor: "black",
+              borderWidth: 1,
+              borderRadius: 60,
+              marginTop: 10,
             }}
             selectedValue={picked}
             onValueChange={(i) => setPicked(i)}

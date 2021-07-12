@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { connect } from "react-redux";
+import { main, title } from "../color";
 
 //Screens
 import DS from "./D&S";
@@ -25,10 +26,10 @@ const UserStack = () => {
     <stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#222831",
+          backgroundColor: main,
         },
         headerTitleStyle: {
-          color: "#00adb5",
+          color: title,
         },
         headerTitleAlign: "center",
         headerBackTitleVisible: false,
@@ -50,7 +51,7 @@ const Main = (props) => {
       {props.UserData.length ? (
         <Tab.Navigator
           barStyle={{
-            backgroundColor: "#222831",
+            backgroundColor: main,
           }}
           labeled={false}
           keyboardHidesNavigationBar={true}

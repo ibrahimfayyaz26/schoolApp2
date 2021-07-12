@@ -12,6 +12,7 @@ import Class from "../../components/Class";
 import { connect } from "react-redux";
 import * as Actions from "../../store/actions/D&SAction";
 import { useFocusEffect } from "@react-navigation/native";
+import BannerAd from "../../components/BannerAd";
 
 const { height, width } = Dimensions.get("window");
 
@@ -34,49 +35,55 @@ const DS = (props) => {
     );
   }, [props.UserData]);
   // console.log(props.DSData);
+
   return (
-    <ScrollView style={{ flex: 1 }}>
-      <Class
-        name="6Th"
-        fun={() =>
-          props.navigation.navigate("DSView", {
-            item: props.DSData.filter((i) => i.classes == "6Th"),
-          })
-        }
-      />
-      <Class
-        name="7Th"
-        fun={() =>
-          props.navigation.navigate("DSView", {
-            item: props.DSData.filter((i) => i.classes == "7Th"),
-          })
-        }
-      />
-      <Class
-        name="8Th"
-        fun={() =>
-          props.navigation.navigate("DSView", {
-            item: props.DSData.filter((i) => i.classes == "8Th"),
-          })
-        }
-      />
-      <Class
-        name="9Th"
-        fun={() =>
-          props.navigation.navigate("DSView", {
-            item: props.DSData.filter((i) => i.classes == "9Th"),
-          })
-        }
-      />
-      <Class
-        name="10Th"
-        fun={() =>
-          props.navigation.navigate("DSView", {
-            item: props.DSData.filter((i) => i.classes == "10Th"),
-          })
-        }
-      />
-    </ScrollView>
+    <View style={{ flex: 1 }}>
+      <View style={{ width: width, alignItems: "center", margin: 5 }}>
+        <BannerAd />
+      </View>
+      <ScrollView style={{ flex: 1 }}>
+        <Class
+          name="6Th"
+          fun={() =>
+            props.navigation.navigate("DSView", {
+              item: props.DSData.filter((i) => i.classes == "6Th"),
+            })
+          }
+        />
+        <Class
+          name="7Th"
+          fun={() =>
+            props.navigation.navigate("DSView", {
+              item: props.DSData.filter((i) => i.classes == "7Th"),
+            })
+          }
+        />
+        <Class
+          name="8Th"
+          fun={() =>
+            props.navigation.navigate("DSView", {
+              item: props.DSData.filter((i) => i.classes == "8Th"),
+            })
+          }
+        />
+        <Class
+          name="9Th"
+          fun={() =>
+            props.navigation.navigate("DSView", {
+              item: props.DSData.filter((i) => i.classes == "9Th"),
+            })
+          }
+        />
+        <Class
+          name="10Th"
+          fun={() =>
+            props.navigation.navigate("DSView", {
+              item: props.DSData.filter((i) => i.classes == "10Th"),
+            })
+          }
+        />
+      </ScrollView>
+    </View>
   );
 };
 

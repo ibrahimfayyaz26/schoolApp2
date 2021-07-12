@@ -5,6 +5,7 @@ import Leave from "../screens/leave/Leave";
 import LeavePr from "../screens/leave/LeaveStudentPr";
 import LeaveDetails from "../screens/leave/LeaveDetails";
 import LeaveStaffDetails from "../screens/leave/LeaveStaffDetails";
+import { main, title } from "../color";
 
 import { connect } from "react-redux";
 
@@ -18,10 +19,10 @@ const LeaveStack = (props) => {
       <stack.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: "#222831",
+            backgroundColor: main,
           },
           headerTitleStyle: {
-            color: "#00adb5",
+            color: title,
           },
           headerTitleAlign: "center",
           headerBackTitleVisible: false,
@@ -35,10 +36,10 @@ const LeaveStack = (props) => {
       <stack.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: "#222831",
+            backgroundColor: main,
           },
           headerTitleStyle: {
-            color: "#00adb5",
+            color: title,
           },
           headerTitleAlign: "center",
           headerBackTitleVisible: false,
@@ -65,10 +66,10 @@ const LeaveStack = (props) => {
       <stack.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: "#222831",
+            backgroundColor: main,
           },
           headerTitleStyle: {
-            color: "#00adb5",
+            color: title,
           },
           headerTitleAlign: "center",
           headerBackTitleVisible: false,

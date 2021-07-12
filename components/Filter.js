@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native";
 import { ListItem, Text, Badge } from "native-base";
+import { main, title } from "../color";
 
 const CategoryFilter = (props) => {
   return (
@@ -60,10 +61,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   active: {
-    backgroundColor: "#03bafc",
+    backgroundColor: main,
   },
   inactive: {
-    backgroundColor: "#a0e1eb",
+    backgroundColor: title,
   },
 });
 

@@ -30,6 +30,7 @@ const Card = (props) => {
           source={{
             uri: props.uri ? props.uri : null,
           }}
+          resizeMode="cover"
           style={{
             height: "100%",
             width: "66%",
