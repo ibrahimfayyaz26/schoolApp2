@@ -18,6 +18,7 @@ const LeaveDetails = (props) => {
             height: "100%",
             backgroundColor: "white",
           }}
+          resizeMode="contain"
           source={{
             uri: item.image,
           }}

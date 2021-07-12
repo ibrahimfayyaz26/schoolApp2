@@ -34,7 +34,8 @@ const MainPage = (props) => {
       // console.log(decoded);
       axios
         .get(`${url}/User/${decoded.userId}`)
-        .then((data2) => [props.uploadUser(data2.data), setIs(false)]);
+        .then((data2) => [props.uploadUser(data2.data), setIs(false)])
+        .catch(() => AsyncStorage.clear());
     }
   };
 

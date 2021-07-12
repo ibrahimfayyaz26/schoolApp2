@@ -18,6 +18,7 @@ const NewsDetails = (props) => {
             height: "100%",
             backgroundColor: "white",
           }}
+          resizeMode="contain"
           source={{
             uri: props.route.params.image,
           }}

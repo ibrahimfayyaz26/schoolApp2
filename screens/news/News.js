@@ -14,7 +14,6 @@ import { connect } from "react-redux";
 import * as Actions from "../../store/actions/newsAction";
 import * as Actions1 from "../../store/actions/UserAction";
 import { AdMobInterstitial } from "expo-ads-admob";
-import Constants from "expo-constants";
 import BannerAd from "../../components/BannerAd";
 
 const { height, width } = Dimensions.get("window");
