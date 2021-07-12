@@ -47,7 +47,7 @@ const News = (props) => {
   useFocusEffect(
     useCallback(() => {
       props.fetchData();
-      // ad();
+      ad();
     }, [])
   );
   // console.log(props.newsData.length);
